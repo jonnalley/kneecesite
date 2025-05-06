@@ -25,6 +25,7 @@ jobs:
           target: ${{ env.URL_TO_SCAN }}
           allow_issue_writing: false
           fail_action: false
+          clean: false
           cmd_options: '-I -l FAIL'
 
       #- name: Install Python and zap-cli
