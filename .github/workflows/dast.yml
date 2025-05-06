@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 
 env:
-  SCRIPT_RELATIVE_PATH: ".github/zap_json_sarif.py"
+  SCRIPT_RELATIVE_PATH: ".github/zap_json_to_sarif.py"
   URL_TO_SCAN: "https://kneeceinvestigations.com/"
 
 jobs:
