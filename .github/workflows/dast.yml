@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 
 env:
-  SCRIPT_RELATIVE_PATH: ".github/zap_json_sarif.py"
+  SCRIPT_RELATIVE_PATH: "kneecesite/.github/zap_json_sarif.py"
   URL_TO_SCAN: "https://kneeceinvestigations.com/"
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
       security-events: write
 
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      #- uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Run OWASP Zap Scan on staging
         uses: zaproxy/action-full-scan@75ee1686750ab1511a73b26b77a2aedd295053ed # v0.12.0
@@ -27,30 +27,30 @@ jobs:
           fail_action: false
           cmd_options: '-I -l FAIL'
 
-      - name: Install Python and zap-cli
-        run: |
-          apt-get install -y python3-pip
-          pip3 install zap-cli
+      #- name: Install Python and zap-cli
+      #  run: |
+      #    sudo apt-get install -y python3
 
-      - name: Check out the repository to the runner
+      - name: Check out a conversion script to the runner
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4  
         with:
           sparse-checkout: |
             .github/actions/zap-json-to-serif/zap_json_sarif.py
           sparse-checkout-cone-mode: false
 
-      - name: Retrieve ZAP report in JSON format
-        run: |
-          mkdir -p zap-reports
-          zap-cli --zap-url http://localhost --port 8080 report -o zap-reports/report.json -f json
+      #- name: Retrieve ZAP report in JSON format
+      #  run: |
+      #    mkdir -p zap-reports
+      #    zap-cli --zap-url http://localhost --port 8080 report -o zap-reports/report.json -f json
   
-      - name: Add SARIF converter script
-        run: |
-          chmod +x tools/zap_json_to_sarif.py
+      #- name: Add SARIF converter script
+      #  run: |
+      #    chmod +x tools/zap_json_to_sarif.py
   
       - name: Convert ZAP JSON to SARIF
         run: |
+          pwd
           chmod +x ${{ env.SCRIPT_RELATIVE_PATH }}
-          python3 ${{ env.SCRIPT_RELATIVE_PATH }} zap-reports/report.json zap-reports/report.sarif
+          python3 ${{ env.SCRIPT_RELATIVE_PATH }} ./report_json.json ./report.sarif
       
       
