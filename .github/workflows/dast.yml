@@ -25,7 +25,6 @@ jobs:
           target: ${{ env.URL_TO_SCAN }}
           allow_issue_writing: false
           fail_action: false
-          clean: false
           cmd_options: '-I -l FAIL'
 
       #- name: Install Python and zap-cli
@@ -35,6 +34,7 @@ jobs:
       - name: Check out a conversion script to the runner
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4  
         with:
+          clean: false
           sparse-checkout: ${{ env.SCRIPT_RELATIVE_PATH }}
           sparse-checkout-cone-mode: false
 
