@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 
 env:
-  SCRIPT_RELATIVE_PATH: "kneecesite/.github/zap_json_sarif.py"
+  SCRIPT_RELATIVE_PATH: ".github/zap_json_sarif.py"
   URL_TO_SCAN: "https://kneeceinvestigations.com/"
 
 jobs:
@@ -34,8 +34,7 @@ jobs:
       - name: Check out a conversion script to the runner
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4  
         with:
-          sparse-checkout: |
-            .github/actions/zap-json-to-serif/zap_json_sarif.py
+          sparse-checkout: ${{ env.SCRIPT_RELATIVE_PATH }}
           sparse-checkout-cone-mode: false
 
       #- name: Retrieve ZAP report in JSON format
@@ -52,5 +51,6 @@ jobs:
           pwd
           chmod +x ${{ env.SCRIPT_RELATIVE_PATH }}
           python3 ${{ env.SCRIPT_RELATIVE_PATH }} ./report_json.json ./report.sarif
+          ls -l ./report.sarif
       
       
