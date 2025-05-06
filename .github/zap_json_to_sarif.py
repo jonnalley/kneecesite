@@ -26,7 +26,7 @@ def zap_json_to_sarif(zap_json):
     rules = []
 
     for alert in zap_json.get("site", [{}])[0].get("alerts", []):
-        rule_id = alert["pluginId"]
+        rule_id = alert["pluginid"]
         name = alert["name"]
         severity = alert["riskdesc"].split(" ")[0].lower()
         description = alert["desc"]
