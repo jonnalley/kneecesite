@@ -16,11 +16,11 @@ jobs:
       security-events: write
 
     steps:
-      #- uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      #- uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v4
 
     # take note that currently the checkout action recursively deletes the contents of the directory where this is run
       - name: Check out a conversion script to the runner
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4  
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v4  
         with:
           sparse-checkout: ${{ env.SCRIPT_RELATIVE_PATH }}
           sparse-checkout-cone-mode: false
